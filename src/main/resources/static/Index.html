@@ -1,155 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login / Signup</title>
-    <style>
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            display: flex;
-            width: 400px;
-            height: 500px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-       
-        .form-container {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        h1 {
-            text-align: center;
-            color: #2575fc;
-            margin-bottom: 20px;
-        }
-
-        .input-field {
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 100%;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #2575fc;
-        }
-
-        .btn {
-            background-color: #2575fc;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s ease-in-out;
-        }
-
-        .btn:hover {
-            background-color: #6a11cb;
-        }
-
-        .toggle-btn {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .toggle-btn a {
-            color: #2575fc;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .toggle-btn a:hover {
-            text-decoration: underline;
-        }
-
-        .signup-container {
-            display: none;
-        }
-
-        .active {
-            display: block;
-        }
-
-        .form-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-       
-        <div class="form-container login-container active">
-            <h1>Login</h1>
-            <div class="form-wrapper">
-                <input type="text" class="input-field" placeholder="Username" required>
-                <input type="password" class="input-field" placeholder="Password" required>
-                <button class="btn">Login</button>
-                <div class="toggle-btn">
-                    <p>Don't have an account? <a href="#" id="to-signup">Sign up</a></p>
-                </div>
-            </div>
-        </div>
+<body class="bg-gray-100 p-8">
 
-       
-        <div class="form-container signup-container">
-            <h1>Sign Up</h1>
-            <div class="form-wrapper">
-                <input type="text" class="input-field" placeholder="Username" required>
-                <input type="email" class="input-field" placeholder="Email" required>
-                <input type="password" class="input-field" placeholder="Password" required>
-                <input type="password" class="input-field" placeholder="Confirm Password" required>
-                <button class="btn">Sign Up</button>
-                <div class="toggle-btn">
-                    <p>Already have an account? <a href="#" id="to-login">Login</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
+  <h1 class="text-3xl font-bold mb-6 text-center">Employee Management</h1>
 
-    <script>
-        const toSignup = document.getElementById('to-signup');
-        const toLogin = document.getElementById('to-login');
-        const loginContainer = document.querySelector('.login-container');
-        const signupContainer = document.querySelector('.signup-container');
+  <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
 
-        toSignup.addEventListener('click', () => {
-            loginContainer.classList.remove('active');
-            signupContainer.classList.add('active');
-        });
+    <form id="employeeForm" class="mb-6">
+      <input type="hidden" id="employeeId" />
 
-        toLogin.addEventListener('click', () => {
-            signupContainer.classList.remove('active');
-            loginContainer.classList.add('active');
-        });
-    </script>
+      <label class="block mb-2 font-semibold">Name</label>
+      <input id="name" type="text" required
+             class="w-full p-2 border border-gray-300 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">Phone</label>
+      <input id="phone" type="tel" required
+             class="w-full p-2 border border-gray-300 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">Email</label>
+      <input id="email" type="email" required
+             class="w-full p-2 border border-gray-300 rounded mb-4" />
+
+      <button type="submit"
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Save Employee
+      </button>
+      <button type="button" id="resetBtn"
+              class="ml-4 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">
+        Reset
+      </button>
+    </form>
+
+    <div id="message" class="mb-4 text-center"></div>
+
+    <table class="w-full table-auto border-collapse border border-gray-300">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border border-gray-300 px-4 py-2">ID</th>
+          <th class="border border-gray-300 px-4 py-2">Name</th>
+          <th class="border border-gray-300 px-4 py-2">Phone</th>
+          <th class="border border-gray-300 px-4 py-2">Email</th>
+          <th class="border border-gray-300 px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="employeesTableBody"></tbody>
+    </table>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

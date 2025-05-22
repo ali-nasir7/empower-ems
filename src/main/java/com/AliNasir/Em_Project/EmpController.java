@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 
 public class EmpController {
     
@@ -37,7 +38,7 @@ public class EmpController {
         return employeeSerivce.readEmployee(id);
     }
 
-    @PostMapping("/employees")
+    @PostMapping("/employ")
     public String createEmployee(@RequestBody Employee employee) {
         //employees.add(employee);
         return employeeSerivce.createEmployee(employee);
